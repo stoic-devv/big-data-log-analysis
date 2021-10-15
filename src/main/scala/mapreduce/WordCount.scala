@@ -10,7 +10,7 @@ import scala.annotation.tailrec
 
 class WordCount
 
-object WordCount {
+object WordCount:
 
   class Map extends MapReduceBase with Mapper[LongWritable, Text, Text, IntWritable] {
     val one = new IntWritable(1)
@@ -49,7 +49,7 @@ object WordCount {
 
   }
 
-  def main(args: Array[String]): Unit = {
+  /*def main(args: Array[String]): Unit = {
     val conf = new JobConf(this.getClass)
     conf.setJobName("my word count")
 
@@ -70,8 +70,8 @@ object WordCount {
 
     JobClient.runJob(conf)
 
-  }
-
-}
+  }*/
+  
+  
 
 
