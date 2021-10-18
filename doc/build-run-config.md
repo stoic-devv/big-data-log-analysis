@@ -45,16 +45,16 @@ hw-user@sandbox-hdp~$ ls /root/hw-dir
 ### Copy our jar file and data to hortonbox
 ```console
 # copy jar file. Default jar location: <project-dir-path>/target/scala-3.0.2/
-foo@bar:<project-dir-path>$ scp -P 2222 <path-to-jar> root@<hortonbox-ip-addr>:~/hw-dir
+foo@bar:<project-dir-path>$ scp -P 2222 <path-to-jar> root@<hortonbox-ip-addr>:/hw-dir
 # copy log file to hw-dir
 # sample jars attached in <project-dir>/src/main/resources
-foo@bar:<project-dir-path>$ scp -P 2222 <path-to-log-file> root@<hortonbox-ip-addr>:~/hw-dir
+foo@bar:<project-dir-path>$ scp -P 2222 <path-to-log-file> root@<hortonbox-ip-addr>:/hw-dir
 # log in 
 ```
 ### Run jar file with arguments
 ```console
 # run the hadoop jar 
-hdfs@sandbox-hdp~$ hadoop jar hw-dir/<jar directory> <arg-one> <arg-two> /user/hw-user/input
+hdfs@sandbox-hdp~$ hadoop jar /hw-dir/<jar directory> <arg-one> <arg-two> /user/hw-user/input
 
 ```
 
