@@ -1,7 +1,7 @@
 package jobs.errdistsort
 
 import constants.{DistributionJobConstants, JobsConfigConstants}
-import entity.CompositeKeyEntity
+import entity.CompositeKeyWritableEntity
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.{IntWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf, TextInputFormat, TextOutputFormat}
@@ -50,12 +50,12 @@ object ErrDistSortJob:
     errSortConf.setMapperClass(classOf[ErrSortMapper])
     //errSortConf.setReducerClass(classOf[ErrDistReducer])
     
-    errSortConf.setMapOutputKeyClass(classOf[CompositeKeyEntity])
+    errSortConf.setMapOutputKeyClass(classOf[CompositeKeyWritableEntity])
     errSortConf.setMapOutputValueClass(classOf[NullWritable])
 
     errSortConf.setInputFormat(classOf[TextInputFormat])
     errSortConf.set(DistributionJobConstants.MAPRED_SEPARATOR_PARAM, ",")
-    errSortConf.setOutputFormat(classOf[TextOutputFormat[CompositeKeyEntity, NullWritable]])
+    errSortConf.setOutputFormat(classOf[TextOutputFormat[CompositeKeyWritableEntity, NullWritable]])
 
     // set input and output dirs
     FileInputFormat.setInputPaths(errSortConf, inputPath)

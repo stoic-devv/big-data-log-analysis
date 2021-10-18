@@ -4,7 +4,7 @@ import org.apache.hadoop.io.{IntWritable, Text, WritableComparable}
 
 import java.io.{DataInput, DataOutput, IOException}
 
-class CompositeKeyEntity(var keyOne: Text, var keyTwo: IntWritable) extends WritableComparable[CompositeKeyEntity] {
+class CompositeKeyWritableEntity(var keyOne: Text, var keyTwo: IntWritable) extends WritableComparable[CompositeKeyWritableEntity] {
 
   def this() = {
     this(new Text(), new IntWritable())
@@ -23,7 +23,7 @@ class CompositeKeyEntity(var keyOne: Text, var keyTwo: IntWritable) extends Writ
   }
 
   @throws(classOf[IOException])
-  override def compareTo(o: CompositeKeyEntity): Int = {
+  override def compareTo(o: CompositeKeyWritableEntity): Int = {
     val primaryCompare = -1*keyTwo.compareTo(o.keyTwo)
     primaryCompare match {
       case 0 => keyOne.compareTo(o.keyOne)
