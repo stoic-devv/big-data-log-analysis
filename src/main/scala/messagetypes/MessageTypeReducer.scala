@@ -15,10 +15,7 @@ class MessageTypeReducer extends MapReduceBase with Reducer[Text,IntWritable,Tex
         case true => calcSum(accum + itr.next().get(), itr)
         case false => accum
       }
-    }    
+    }
     output.collect(key, new IntWritable(calcSum(0, values)))
   }
-
-  
-
 }
