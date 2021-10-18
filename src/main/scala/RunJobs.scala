@@ -1,12 +1,13 @@
 import constants.JobsConfigConstants
-import distribution.DistributionJob
-import messagetypes.MessageTypeJob
+import jobs.distribution.DistributionJob
+import jobs.errdistsort.ErrDistSortJob
+import jobs.messagetypes.MessageTypeJob
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf}
 import org.apache.hadoop.mapreduce.Job
 import org.apache.hadoop.util.ToolRunner
-import somepackage.SomeJob
+import jobs.somepackage.SomeJob
 import utils.DistributionUtils.getResetWindow
 import utils.ObtainConfigReference
 
@@ -78,6 +79,8 @@ object RunJobs:
         // run job
         JobClient.runJob(msgTypeCountConf)
       }
+
+      case "2" => ErrDistSortJob(new Path(args(1)))
 
       case _ => {
         ???
