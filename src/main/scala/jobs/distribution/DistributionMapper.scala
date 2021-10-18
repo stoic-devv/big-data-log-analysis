@@ -1,4 +1,4 @@
-package distribution
+package jobs.distribution
 
 import constants.{DistributionJobConstants, JobsConfigConstants}
 import entity.MsgTypeCountWritableEntity

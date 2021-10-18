@@ -1,4 +1,4 @@
-package messagetypes
+package jobs.messagetypes
 
 import org.apache.hadoop.io.{IntWritable, LongWritable, Text}
 import org.apache.hadoop.mapred.{MapReduceBase, Mapper, OutputCollector, Reporter}

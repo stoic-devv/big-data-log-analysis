@@ -5,7 +5,7 @@ import org.apache.hadoop.io.{IntWritable, Text, WritableComparable}
 import java.io.{DataInput, DataOutput, IOException}
 
 /**
- * Intermediate output writable for the distribution job
+ * Intermediate output writable for the jobs.distribution job
  * eg: WARN, 1
  **/
 // NOTE: var is used because hadoop sets the param values from a datastream in readFields
