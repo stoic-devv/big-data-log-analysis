@@ -12,6 +12,7 @@ val apacheCommonIOVersion = "2.11.0"
 val scalacticVersion = "3.2.9"
 val generexVersion = "1.0.2"
 val hadoopVersion = "1.2.1"
+val jodaVersion = "2.10.12"
 
 resolvers += Resolver.jcenterRepo
 resolvers += Resolver.sonatypeRepo("public")
@@ -32,5 +33,6 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
   "com.typesafe" % "config" % typesafeConfigVersion,
   "com.github.mifmif" % "generex" % generexVersion,
-  "org.apache.hadoop" % "hadoop-core" % hadoopVersion
+  "org.apache.hadoop" % "hadoop-core" % hadoopVersion,
+  "joda-time" % "joda-time" % jodaVersion
 )
