@@ -18,6 +18,7 @@ object JobsConfigConstants extends Enumeration {
   val MESSAGE_TYPE_OUTPUT_DIR = "MESSAGE_TYPE_OUTPUT_DIR"
   val ERRDIST_OUTPUT_DIR = "ERRDIST_OUTPUT_DIR"
   val ERRDISTSORT_OUTPUT_DIR = "ERRDISTSORT_OUTPUT_DIR"
+  val REGEX_OUTPUT_DIR = "REGEX_OUTPUT_DIR"
 }
 
 object DistributionJobConstants extends Enumeration {
@@ -31,4 +32,10 @@ object ErrDistSortJobConstants extends Enumeration {
   type String
   val OBJ_NAME = "err-dist-sort-job"
   val INTERVAL = "INTERVAL"
+}
+
+object MaxMatchingJobConstants extends Enumeration {
+  type String
+  val OBJ_NAME = "max-pattern-job"
+  val PATTERN = "SEARCH_STRING"
 }
