@@ -48,7 +48,6 @@ object ErrDistSortJob:
     errSortConf.setOutputValueClass(classOf[NullWritable])
 
     errSortConf.setMapperClass(classOf[ErrSortMapper])
-    //errSortConf.setReducerClass(classOf[ErrDistReducer])
     
     errSortConf.setMapOutputKeyClass(classOf[CompositeKeyWritableEntity])
     errSortConf.setMapOutputValueClass(classOf[NullWritable])

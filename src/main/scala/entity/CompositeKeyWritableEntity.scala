@@ -4,6 +4,7 @@ import org.apache.hadoop.io.{IntWritable, Text, WritableComparable}
 
 import java.io.{DataInput, DataOutput, IOException}
 
+// NOTE: var is used because hadoop sets the param values from a datastream in readFields
 class CompositeKeyWritableEntity(var keyOne: Text, var keyTwo: IntWritable) extends WritableComparable[CompositeKeyWritableEntity] {
 
   def this() = {
