@@ -7,6 +7,9 @@ import org.apache.hadoop.io.Text
 import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf, TextInputFormat, TextOutputFormat}
 import utils.ObtainConfigReference
 
+/**
+ * Sets config and runs the job for finding the maximum length of the log message by type that matches the search query 
+ **/
 class MaxMatchingJob
 
 object MaxMatchingJob:

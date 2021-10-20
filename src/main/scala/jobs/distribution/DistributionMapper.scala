@@ -21,7 +21,7 @@ class DistributionMapper extends MapReduceBase with Mapper[Object, Text, Text, M
 
     override def map(key: Object, value: Text, output: OutputCollector[Text, MsgTypeCountWritableEntity], reporter: Reporter): Unit = {
         val logEntity = parseLogStr(value.toString)
-        val tmInterval = DistributionUtils.getTimeInterval(logEntity.timestamp, interval,resetInterval )
+        val tmInterval = DistributionUtils.getTimeInterval(logEntity.timestamp, interval,resetInterval)
         val msgWritableEntity = new MsgTypeCountWritableEntity(new Text(logEntity.messageType), one)
         output.collect(new Text(tmInterval.toString), msgWritableEntity)
     }

@@ -5,26 +5,44 @@ import entity.MsgTypeCountWritableEntity
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.{IntWritable, Text}
-import org.apache.hadoop.mapred.{JobConf, TextInputFormat, TextOutputFormat}
+import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf, TextInputFormat, TextOutputFormat}
 import utils.DistributionUtils.*
 import utils.{DistributionUtils, ObtainConfigReference}
 
+/**
+ * Sets config and runs the distribution job
+ **/
 class DistributionJob
 
 object DistributionJob:
 
-  def apply(conf: JobConf): Unit = {
+  def apply(inputPath: Path): Unit = {
 
-    conf.setOutputKeyClass(classOf[Text])
-    conf.setOutputValueClass(classOf[Text])
+    val jobsConfig = ObtainConfigReference(JobsConfigConstants.FILE_NAME, JobsConfigConstants.OBJ_NAME) match {
+      case Some(value) => value
+      case None => throw new RuntimeException("Cannot locate job configuration")
+    }
 
-    conf.setMapperClass(classOf[DistributionMapper])
-    conf.setReducerClass(classOf[DistributionReducer])
+    val distConf = new JobConf(this.getClass)
+    distConf.setJobName("Distribution of message types")
+    distConf.setJarByClass(this.getClass)
 
-    conf.setMapOutputKeyClass(classOf[Text])
-    conf.setMapOutputValueClass(classOf[MsgTypeCountWritableEntity])
+    distConf.setOutputKeyClass(classOf[Text])
+    distConf.setOutputValueClass(classOf[Text])
+    
+    distConf.setMapperClass(classOf[DistributionMapper])
+    distConf.setReducerClass(classOf[DistributionReducer])
 
-    conf.setInputFormat(classOf[TextInputFormat])
-    conf.set(DistributionJobConstants.MAPRED_SEPARATOR_PARAM, ",")
-    conf.setOutputFormat(classOf[TextOutputFormat[Text, Text]])
+    distConf.setMapOutputKeyClass(classOf[Text])
+    distConf.setMapOutputValueClass(classOf[MsgTypeCountWritableEntity])
+
+    distConf.setInputFormat(classOf[TextInputFormat])
+    distConf.set(DistributionJobConstants.MAPRED_SEPARATOR_PARAM, ",")
+    distConf.setOutputFormat(classOf[TextOutputFormat[Text, Text]])
+
+    FileInputFormat.setInputPaths(distConf, inputPath)
+    FileOutputFormat.setOutputPath(distConf, new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
+      jobsConfig.getString(JobsConfigConstants.DISTRIBUTION_OUTPUT_DIR)))
+
+    JobClient.runJob(distConf)
   }

@@ -7,6 +7,9 @@ import org.apache.hadoop.io.{IntWritable, NullWritable, Text}
 import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf, TextInputFormat, TextOutputFormat}
 import utils.ObtainConfigReference
 
+/**
+ * Sets config and runs the error distribution and sorting job
+ **/
 class ErrDistSortJob
 
 object ErrDistSortJob:

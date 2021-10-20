@@ -8,10 +8,12 @@ import org.apache.hadoop.fs.Path
 import org.apache.hadoop.mapred.{FileInputFormat, FileOutputFormat, JobClient, JobConf}
 import org.apache.hadoop.mapreduce.Job
 import org.apache.hadoop.util.ToolRunner
-import jobs.somepackage.SomeJob
 import utils.DistributionUtils.getResetWindow
 import utils.ObtainConfigReference
 
+/**
+ * Runs the job based on arguments provided
+ **/
 object RunJobs:
   def main(args: Array[String]): Unit = {
 
@@ -28,22 +30,7 @@ object RunJobs:
     args(0) match {
 
       // distributions of the logs
-      case "0" => {
-        val distJobConf = new JobConf(MessageTypeJob.getClass)
-        distJobConf.setJobName("Distribution of messages by types")
-        distJobConf.setJarByClass(this.getClass)
-
-        // set input and output dirs
-        FileInputFormat.setInputPaths(distJobConf, new Path(args(1)))
-        FileOutputFormat.setOutputPath(distJobConf, new Path(config.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
-          config.getString(JobsConfigConstants.DISTRIBUTION_OUTPUT_DIR)))
-
-        // set job configuration
-        DistributionJob(distJobConf)
-
-        // run job
-        JobClient.runJob(distJobConf)
-      }
+      case "0" => DistributionJob(new Path(args(1)))
 
       // counting log messages by types
       case "1" => MessageTypeJob(new Path(args(1)))
@@ -54,8 +41,17 @@ object RunJobs:
       // finding maximum length of msg by msg type
       case "3" => MaxMatchingJob(new Path(args(1)))
 
-      case _ => {
-        ???
+      // run all jobs
+      case "4" => {
+        val inputPath = new Path(args(1))
+        DistributionJob(inputPath)
+        MessageTypeJob(inputPath)
+        ErrDistSortJob(inputPath)
+        MaxMatchingJob(inputPath)
       }
+
+      // not implemented
+      case _ => {???}
+
     }
   }
