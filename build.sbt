@@ -10,6 +10,9 @@ val sfl4sVersion = "2.0.0-alpha5"
 val typesafeConfigVersion = "1.4.1"
 val apacheCommonIOVersion = "2.11.0"
 val scalacticVersion = "3.2.9"
+val scalaticPlusVersion = "3.2.9.0"
+val scalaMockVersion = "5.1.0"
+val mockitoVersion = "3.12.4"
 val generexVersion = "1.0.2"
 val hadoopVersion = "1.2.1"
 val jodaVersion = "2.10.12"
@@ -31,6 +34,9 @@ libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % scalacticVersion,
   "org.scalatest" %% "scalatest" % scalacticVersion % Test,
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
+  "org.scalatestplus" %% "mockito-3-4" % scalaticPlusVersion % Test,
+  "org.scalamock" % "scalamock_2.11" % scalaMockVersion,
+  "org.mockito" % "mockito-core" % mockitoVersion,
   "com.typesafe" % "config" % typesafeConfigVersion,
   "com.github.mifmif" % "generex" % generexVersion,
   "org.apache.hadoop" % "hadoop-core" % hadoopVersion,
