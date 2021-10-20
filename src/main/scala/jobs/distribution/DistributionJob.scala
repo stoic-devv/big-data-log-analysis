@@ -16,7 +16,7 @@ class DistributionJob
 
 object DistributionJob:
 
-  def apply(inputPath: Path): Unit = {
+  def apply(inputPath: String, outputPathBase: String): Unit = {
 
     val jobsConfig = ObtainConfigReference(JobsConfigConstants.FILE_NAME, JobsConfigConstants.OBJ_NAME) match {
       case Some(value) => value
@@ -40,9 +40,9 @@ object DistributionJob:
     distConf.set(DistributionJobConstants.MAPRED_SEPARATOR_PARAM, ",")
     distConf.setOutputFormat(classOf[TextOutputFormat[Text, Text]])
 
-    FileInputFormat.setInputPaths(distConf, inputPath)
-    FileOutputFormat.setOutputPath(distConf, new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
-      jobsConfig.getString(JobsConfigConstants.DISTRIBUTION_OUTPUT_DIR)))
+    FileInputFormat.setInputPaths(distConf, new Path(inputPath))
+    FileOutputFormat.setOutputPath(distConf, 
+      new Path(outputPathBase + jobsConfig.getString(JobsConfigConstants.DISTRIBUTION_OUTPUT_DIR)))
 
     JobClient.runJob(distConf)
   }

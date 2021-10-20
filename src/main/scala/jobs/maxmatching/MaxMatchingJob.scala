@@ -14,7 +14,7 @@ class MaxMatchingJob
 
 object MaxMatchingJob:
 
-  def apply(inputPath: Path): Unit = {
+  def apply(inputPath: String, outputBasePath: String): Unit = {
     val jobsConfig = ObtainConfigReference(JobsConfigConstants.FILE_NAME, JobsConfigConstants.OBJ_NAME) match {
       case Some(value) => value
       case None => throw new RuntimeException("Cannot locate job configuration")
@@ -39,8 +39,8 @@ object MaxMatchingJob:
     maxMatchConf.setOutputFormat(classOf[TextOutputFormat[Text, MatchValueWritableEntity]])
 
     // set input and output dirs
-    FileInputFormat.setInputPaths(maxMatchConf, inputPath)
-    FileOutputFormat.setOutputPath(maxMatchConf, new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
+    FileInputFormat.setInputPaths(maxMatchConf, new Path(inputPath))
+    FileOutputFormat.setOutputPath(maxMatchConf, new Path(outputBasePath +
       jobsConfig.getString(JobsConfigConstants.REGEX_OUTPUT_DIR)))
 
     // run job

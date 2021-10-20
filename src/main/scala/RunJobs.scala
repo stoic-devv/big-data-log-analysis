@@ -23,31 +23,30 @@ object RunJobs:
     }
 
     args.length match {
-      case 2 | 3 => {}
+      case 3 => {}
       case _ => throw new RuntimeException("Invalid number of arguments")
     }
 
     args(0) match {
 
       // distributions of the logs
-      case "0" => DistributionJob(new Path(args(1)))
+      case "0" => DistributionJob(args(1), args(2))
 
       // counting log messages by types
-      case "1" => MessageTypeJob(new Path(args(1)))
+      case "1" => MessageTypeJob(args(1), args(2))
 
       // sort error distribution
-      case "2" => ErrDistSortJob(new Path(args(1)))
+      case "2" => ErrDistSortJob(args(1), args(2))
 
       // finding maximum length of msg by msg type
-      case "3" => MaxMatchingJob(new Path(args(1)))
+      case "3" => MaxMatchingJob(args(1), args(2))
 
       // run all jobs
-      case "4" => {
-        val inputPath = new Path(args(1))
-        DistributionJob(inputPath)
-        MessageTypeJob(inputPath)
-        ErrDistSortJob(inputPath)
-        MaxMatchingJob(inputPath)
+      case "4" => {        
+        DistributionJob(args(1), args(2))
+        MessageTypeJob(args(1), args(2))
+        ErrDistSortJob(args(1), args(2))
+        MaxMatchingJob(args(1), args(2))
       }
 
       // not implemented

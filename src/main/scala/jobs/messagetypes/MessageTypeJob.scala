@@ -13,7 +13,7 @@ class MessageTypeJob
 
 object MessageTypeJob:
 
-  def apply(inputPath: Path): Unit = {
+  def apply(inputPath: String, outputBasePath: String): Unit = {
 
     val jobsConfig = ObtainConfigReference(JobsConfigConstants.FILE_NAME, JobsConfigConstants.OBJ_NAME) match {
       case Some(value) => value
@@ -39,8 +39,8 @@ object MessageTypeJob:
     msgTypeConf.setInputFormat(classOf[TextInputFormat])
     msgTypeConf.setOutputFormat(classOf[TextOutputFormat[Text, IntWritable]])
 
-    FileInputFormat.setInputPaths(msgTypeConf, inputPath)
-    FileOutputFormat.setOutputPath(msgTypeConf, new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
+    FileInputFormat.setInputPaths(msgTypeConf, new Path(inputPath))
+    FileOutputFormat.setOutputPath(msgTypeConf, new Path(outputBasePath +
       jobsConfig.getString(JobsConfigConstants.MESSAGE_TYPE_OUTPUT_DIR)))
 
     JobClient.runJob(msgTypeConf)

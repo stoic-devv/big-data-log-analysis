@@ -67,21 +67,21 @@ object ErrDistSortJob:
     JobClient.runJob(errSortConf)
   }
 
-  def apply(inputPath: Path): Unit = {
+  def apply(inputPath: String, outputBasePath: String): Unit = {
 
     val jobsConfig = ObtainConfigReference(JobsConfigConstants.FILE_NAME, JobsConfigConstants.OBJ_NAME) match {
       case Some(value) => value
       case None => throw new RuntimeException("Cannot locate job configuration")
     }
 
-    val firstJobOutPath = new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
+    val firstJobOutPath = new Path(outputBasePath +
       jobsConfig.getString(JobsConfigConstants.ERRDIST_OUTPUT_DIR))
 
     // get error distribution job
-    runErrDistJob(inputPath, firstJobOutPath)
+    runErrDistJob(new Path(inputPath), firstJobOutPath)
 
     // sort the error distribution
-    runErrSortJob(firstJobOutPath, new Path(jobsConfig.getString(JobsConfigConstants.BASE_OUTPUT_DIR) +
+    runErrSortJob(firstJobOutPath, new Path(outputBasePath +
       jobsConfig.getString(JobsConfigConstants.ERRDISTSORT_OUTPUT_DIR)))
 
   }
