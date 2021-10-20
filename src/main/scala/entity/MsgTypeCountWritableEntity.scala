@@ -8,7 +8,6 @@ import java.io.{DataInput, DataOutput, IOException}
  * Intermediate output writable for the distribution job
  * eg: WARN, 1
  **/
-// NOTE: var is used because hadoop sets the param values from a datastream in readFields
 class MsgTypeCountWritableEntity(val msgType: Text, val msgCount: IntWritable) extends WritableComparable[MsgTypeCountWritableEntity] {
 
   def this() = {
