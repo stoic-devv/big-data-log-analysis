@@ -11,7 +11,6 @@ class MessageTypeMapper extends MapReduceBase with Mapper[LongWritable, Text, Te
   
   override def map(key: LongWritable, value: Text, output: OutputCollector[Text, IntWritable], reporter: Reporter): Unit ={
     val logEntity = parseLogStr(value.toString)
-    logger.info("Message type mapper reached")
     output.collect(new Text(logEntity.messageType), new IntWritable(1))
   }
 }
