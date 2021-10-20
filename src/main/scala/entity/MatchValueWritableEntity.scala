@@ -39,6 +39,25 @@ class MatchValueWritableEntity(val msgTime: Text, val msg: Text, val length: Int
     }
   }
 
+  /**
+  * checks if obj is instance of MatchValueWritableEntity
+  **/
+  def canEqual(a: Any)  = a.isInstanceOf[MatchValueWritableEntity]
+
+  /**
+   * checks if given obj equals this
+   **/
+  override def equals(obj: Any): Boolean = {
+    obj match {
+      case obj: MatchValueWritableEntity => {
+        obj.canEqual(this) && msg.equals(obj.msg) &&
+          msgTime.equals(obj.msgTime) && length.equals(obj.length)
+      }
+      case _ => false
+    }
+
+  }
+
   override def toString: String = {
     return "%s, %s, %s".format(msgTime, msg, length)
   }
