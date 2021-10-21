@@ -7,6 +7,9 @@ import java.util.Iterator
 
 class MessageTypeReducer extends MapReduceBase with Reducer[Text,IntWritable,Text,IntWritable] {
 
+  /**
+   * Adds number of messages by message type key
+   **/
   def reduce(key: Text, values: Iterator[IntWritable],
              output: OutputCollector[Text, IntWritable], reporter: Reporter): Unit = {
 

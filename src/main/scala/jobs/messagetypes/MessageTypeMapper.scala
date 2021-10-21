@@ -9,6 +9,9 @@ class MessageTypeMapper extends MapReduceBase with Mapper[LongWritable, Text, Te
 
   val logger = CreateLogger(classOf[MessageTypeMapper])
   
+  /**
+   * Maps line to message type and count 1
+   **/
   override def map(key: LongWritable, value: Text, output: OutputCollector[Text, IntWritable], reporter: Reporter): Unit ={
     val logEntity = parseLogStr(value.toString)
     output.collect(new Text(logEntity.messageType), new IntWritable(1))

@@ -20,20 +20,25 @@ object MaxMatchingJob:
       case None => throw new RuntimeException("Cannot locate job configuration")
     }
 
-      val maxMatchConf = new JobConf(this.getClass)
-      maxMatchConf.setJobName("Maximum length string by type")
-      maxMatchConf.setJarByClass(this.getClass)
+    // set job name and jar
+    val maxMatchConf = new JobConf(this.getClass)
+    maxMatchConf.setJobName("Maximum length string by type")
+    maxMatchConf.setJarByClass(this.getClass)
 
+    // set output key-value class
     maxMatchConf.setOutputKeyClass(classOf[Text])
     maxMatchConf.setOutputValueClass(classOf[MatchValueWritableEntity])
 
+    // set mapper and reducer class
     maxMatchConf.setMapperClass(classOf[MaxMatchingMapper])
     maxMatchConf.setCombinerClass(classOf[MaxMatchingReducer])
     maxMatchConf.setReducerClass(classOf[MaxMatchingReducer])
 
+    // set mapper key-value class
     maxMatchConf.setMapOutputKeyClass(classOf[Text])
     maxMatchConf.setMapOutputValueClass(classOf[MatchValueWritableEntity])
 
+    // formatting
     maxMatchConf.setInputFormat((classOf[TextInputFormat]))
     maxMatchConf.set(DistributionJobConstants.MAPRED_SEPARATOR_PARAM, ",")
     maxMatchConf.setOutputFormat(classOf[TextOutputFormat[Text, MatchValueWritableEntity]])

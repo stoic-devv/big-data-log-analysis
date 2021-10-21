@@ -19,6 +19,9 @@ class DistributionMapper extends MapReduceBase with Mapper[Object, Text, Text, M
     val interval = config.getInt(DistributionJobConstants.INTERVAL)
     val resetInterval = getResetWindow(interval)
 
+    /**
+     * Maps time to time interval. This is the output key. Value is a custom writable with log line info extracted
+     **/
     override def map(key: Object, value: Text, output: OutputCollector[Text, MsgTypeCountWritableEntity], reporter: Reporter): Unit = {
         val logEntity = parseLogStr(value.toString)
         val tmInterval = DistributionUtils.getTimeInterval(logEntity.timestamp, interval,resetInterval)

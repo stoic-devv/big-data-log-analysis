@@ -18,6 +18,9 @@ class ErrDistMapper extends MapReduceBase with Mapper[Object, Text, Text, IntWri
   val interval = config.getInt(ErrDistSortJobConstants.INTERVAL)
   val resetInterval = getResetWindow(interval)
 
+  /**
+   * Maps timestamp to time interval. Writes to output only if message type is ERROR
+   **/
   override def map(key: Object, value: Text, output: OutputCollector[Text, IntWritable], reporter: Reporter): Unit = {
     val logEntity = parseLogStr(value.toString)
     val tmInterval = DistributionUtils.getTimeInterval(logEntity.timestamp, interval, resetInterval)

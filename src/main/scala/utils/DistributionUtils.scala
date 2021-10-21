@@ -18,6 +18,9 @@ object DistributionUtils:
     }
   }
 
+  /**
+   * Returns the time interval in which the given interval lies
+   **/
   def getTimeInterval(tmStr: String, gi: Int, rw: Int): TimeIntervalEntity = {
     
     // timestamp format in log file

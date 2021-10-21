@@ -8,6 +8,9 @@ import java.util.Iterator
 
 class MaxMatchingReducer extends MapReduceBase with Reducer[Text,MatchValueWritableEntity,Text,MatchValueWritableEntity] {
 
+  /**
+   * Calculates the maximum value for a given key
+   **/
   def reduce(key: Text, values: Iterator[MatchValueWritableEntity],
              output: OutputCollector[Text, MatchValueWritableEntity], reporter: Reporter): Unit = {
 

@@ -11,6 +11,9 @@ class DistributionReducer extends MapReduceBase with Reducer[Text,MsgTypeCountWr
 
   val SEPARATOR = ","
 
+  /**
+   * Processes iterator for message types and updates the relevant counters
+   **/
   def reduce(key: Text, values: Iterator[MsgTypeCountWritableEntity],
              output: OutputCollector[Text, Text], reporter: Reporter): Unit = {
 

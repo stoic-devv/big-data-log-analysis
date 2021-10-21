@@ -17,6 +17,10 @@ class MaxMatchingMapper extends MapReduceBase with Mapper[Object, Text, Text, Ma
   }
   val pattern = config.getString(MaxMatchingJobConstants.PATTERN).r
 
+  /**
+   * Writes to output only if the log message matches a given pattern
+   * Custom writable introduced to keep the log related info and length
+   **/
   override def map(key: Object, value: Text, output: OutputCollector[Text, MatchValueWritableEntity], reporter: Reporter): Unit = {
     val logEntity = parseLogStr(value.toString)
     

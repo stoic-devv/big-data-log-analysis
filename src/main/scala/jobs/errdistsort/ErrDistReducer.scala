@@ -7,6 +7,9 @@ import java.util.Iterator
 
 class ErrDistReducer extends MapReduceBase with Reducer[Text,IntWritable,Text,IntWritable] {
 
+  /**
+   * Calculates total messages in a given interval
+   **/
   def reduce(key: Text, values: Iterator[IntWritable],
              output: OutputCollector[Text, IntWritable], reporter: Reporter): Unit = {
 
