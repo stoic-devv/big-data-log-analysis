@@ -4,7 +4,7 @@ The log messages in the file are of the type `WARN`, `INFO`, `DEBUG`, `ERROR`.
 Each log message is of the format: `<timestamp> <context> <message type> <logging class> <log message>` <br />
 In the analysis we are only interested in: `<timestamp>`, `<message type>`, `<log message>`
 
-> :warning: the output files of all jobs are zipped and attached in the root directory
+> :warning: the output files of all jobs located [here](../aws-output)
 
 ### Message type distribution
 Given a log file, the task is to analyse the distribution of log message types across a predefined interval. This interval can be set in the `jobs.conf` file. The default interval is set to `5000 ms`.<br />
