@@ -15,7 +15,7 @@ The distributions' `csv` can be found [here](../aws-output/jobs_distribution)
 ### Message type count
 This task is to count the number of log messages by message type. <br />
 `MessageTypeMapper`: it takes input an auto-generated key and a line from log. It writes the log message type and count (`=1`) as output.
-`MessageTypeReducer`: it iterates through the count values and sums them up. Since the keys are message types, we need not do additional handling for separating them.
+`MessageTypeReducer`: it iterates through the count values and sums them up. Since the keys are message types, we need not do additional handling for separating them.<br />
 The output of counts found [here](../aws-output/message_types) are:
 ```console
 WARN	287851
@@ -25,17 +25,17 @@ ERROR	15103
 ```
 
 ### Error type sort by frequency
-This task involves evaluating the distribution of `ERROR` type log message and then sort them in descending order. Default interval is set to `5000 ms` and can be set in the `jobs.conf` file.
-`ErrDistMapper`: it takes input an auto-generated key and a line from log. It parses the line and writes to the stream only if the message is of type `ERROR`. The key of the output stream is a time interval string in which the timestamp belongs.
-`ErrDistReducer`: iterates and counts the number of messages within the timestamp. 
-`ErrSortMapper`: here we use a custom writable with composite key (key and value send to this mapper is combined to form a composite key) which compares in decreasing order of the count of messages in an interval. Since the mapper writes the output in a sorted manner, we leverage this to write the output stream.
+This task involves evaluating the distribution of `ERROR` type log message and then sort them in descending order. Default interval is set to `5000 ms` and can be set in the `jobs.conf` file.<br />
+`ErrDistMapper`: it takes input an auto-generated key and a line from log. It parses the line and writes to the stream only if the message is of type `ERROR`. The key of the output stream is a time interval string in which the timestamp belongs.<br />
+`ErrDistReducer`: iterates and counts the number of messages within the timestamp. <br />
+`ErrSortMapper`: here we use a custom writable with composite key (key and value send to this mapper is combined to form a composite key) which compares in decreasing order of the count of messages in an interval. Since the mapper writes the output in a sorted manner, we leverage this to write the output stream.<br />
 The maximum frequency of error messages : `14` . Output can be found [here](../aws-output/err_dist_sort)
 
 ### Maximum length pattern matching
 In this task we search for the messages matching a given pattern. We finally write the longest messages by message type to the output. Pattern can be set in `jobs.conf`. <br />
-The default pattern used for analysis is: `([a-c][e-g][0-3]|[A-Z][5-9][f-w]){5,15}`
-`MaxMatchingMapper`: Writes to the output only if the given Text value matches the pattern
-`MaxMatchingReducer`: Iterates over the values to find the max length message and writes to output.
+The default pattern used for analysis is: `([a-c][e-g][0-3]|[A-Z][5-9][f-w]){5,15}`<br />
+`MaxMatchingMapper`: Writes to the output only if the given Text value matches the pattern<br />
+`MaxMatchingReducer`: Iterates over the values to find the max length message and writes to output.<br />
 With the given log file, following are the results:
 ```console
 WARN,15:13:09.714, tp)*,RTO#qJMq#d|I@[!0_zbce2ce2cg1ae2be3ag2cg2E6jcg0ae3ce3T8obg1M9hF5kBfnqt&%q's#@cwMP?&h`H=zU, 93
