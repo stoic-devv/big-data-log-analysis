@@ -23,7 +23,7 @@ Grading Evaluation:
 - the documentation exists but it is insufficient to understand your program design and models and how you assembled and deployed all components of your mappers and reducers: up to 5% lost;
 	* documentation exists: -0%
 	
-Final Grade: 8.6%
+Final Grade: 8.4%
 
 Comments: Your repo was missing plugins.sbt which without it, your project would not compile.
 Otherwise, everything is thoroughly well done.
