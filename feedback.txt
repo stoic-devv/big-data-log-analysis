@@ -19,11 +19,11 @@ Grading Evaluation:
 - no instructions in README.md on how to install and run your program: up to 5% lost;
 	* instructions present: -0%
 - the program crashes without completing the core functionality: up to 6% lost;
-	* program doesn't compile: -2%
+	* program doesn't compile: -0.4%
 - the documentation exists but it is insufficient to understand your program design and models and how you assembled and deployed all components of your mappers and reducers: up to 5% lost;
 	* documentation exists: -0%
 	
-Final Grade: 6.8%
+Final Grade: 8.6%
 
 Comments: Your repo was missing plugins.sbt which without it, your project would not compile.
 Otherwise, everything is thoroughly well done.
